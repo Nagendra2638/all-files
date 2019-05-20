@@ -18,7 +18,7 @@ https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
 ----> Install packages to allow apt to use a repository over HTTPS
     #apt-get update && apt-get install apt-transport-https ca-certificates curl software-properties-common
 
------>Add Docker’s official GPG key
+----->Add Dockerâ€™s official GPG key
     #curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 
 ------>Add docker apt repository.
@@ -88,58 +88,3 @@ kops installtion
 #wget https://github.com/kubernetes/kops/releases/download/1.11.0/kops-linux-amd64
 # chmod +x kops-linix-amd64
 #mv kops-linux-amd64 /usr/local/bin/kops
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Full Name (With Surname) : Nagendrababu pedireddi 
-Contact Number :8019903638
-Alternate Number : No
-E-mail Id : nagendra36388@gmail.com
-Current location :pune
-Native Place :payakaraopeta(vizag dist)
-Marital Status (Single / Married) :single
-
-Skype ID :ace0a51ea3edb182
-Feasible time for Skype Interview : after post lauch 2pm to 4 pm.
-
-Total IT experience :4.3 years
-Relevant experience :4 years
-
-Current CTC :4.9lakh
-Expected CTC :30% hike
-Negotiated CTC : yes
-Recent hike (Month & year) : march 2018
-
-Current Organization : Accenture 
-Payroll Company : NGRAM TECHNOLOGIES PRIVATE LIMITED
-Employment History :
-Education details (Qualification ,Percentage & pass-out year) :MCA with 70% and 2013 passout.
-University :Andhra University
-
-Notice Period :30days
-Reason for Change :career growth
-Having H1 or B1 Visa (Yes/No),If Yes, approved year & date of expiry : No
-UAN Number : 
