@@ -1,0 +1,79 @@
+--------------------------------------****LINUX*****------------------------
+
+How to troubleshoot a linux machine?
+-----------------------------------------------
+login that machine-->using ssh
+username@ip and password
+
+#ifconfig 
+
+Q:any command is type it take more time to result
+
+history			//to check history commands  
+#uptime             //it shows the server how long it is running
+  #top/stop           // it show cpu utilization
+sar			//to check cpu consumption
+  #free                 //it shows memory utilization
+  #du /df              //it shows disk utilization
+  #df -Th		//disk usage
+du -sh * 		//shows file consumption
+free -m			//memory usage
+chage -S		//check password expire
+ps -eaf			//to check process id
+kill -9 process ID	//to kill process id
+cp 
+mv
+who -b			//Last reboot time
+cd /var/log/messages	//OS Logs
+dmidecode		//to check physical / virtual serer
+lsof			//to check open files of different users
+ls -la                  //to check hidden files
+/etc/fstab		
+
+reboot			//don't use  this command
+
+
+
+
+
+
+1.In git how do you revert a commit that has already been pushed made public?
+A.git revert cid
+
+2.have you ever encountered failed depolyment? How you handled them? 
+A.   
+
+3.what is the difference between virtulization and containerization?
+A.
+
+
+--------------------------------******nexus*******-------------------------------------------
+1. Seperate repos for prod and non prod environment?
+2. Artifacts capacity planning.. how much size artifacts can be stored , how many artifacts can be stores
+ stored
+3. TTL
+4.Backup plan - Monthly plan/ release plan / space release
+5.Repository structure Of artifacts Is it partition shared or repo per project ?
+6. Authorization and authentication with cloud if any ?
+
+
+
+
+
+
+
+
+important sites:
+-------------------
+https://www.cloudtechnologyexperts.com/kubeadm-on-aws/
+
+
+
+
+
+ 
+
+
+
+
+

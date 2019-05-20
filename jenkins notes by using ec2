@@ -1,0 +1,186 @@
+jenkins notes
+ install the Jenkins installtion aws:   using rpm based.
+----------------------
+1. Lauch centos Linux EC2 inatncce
+
+2.install java and set the path
+
+   wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz
+
+     then unzip the tar file
+     tar -zxvf jdk-1.8-tar.tz
+	 
+        goto .bashrc give the path
+
+    export JAVA_HOME=/root/workspace/jdk1.8
+    export PATH=$JAVA_HOME/bin:$PATH
+      
+     #source ~/.bashrc         ***//using in this command updating the bashrc file.
+     java -version
+
+3.Download jenkins on to EC2 instance
+
+
+     3.1)install the jenkins in (ubuntu):
+	 ===============================	 
+
+       java installtion:(ubuntu)
+      --------------------
+          #sudo add-apt-repository ppa:webupd8team/java
+          sudo apt update
+          sudo apt install oracle-java8-installer
+         #javac -version
+
+
+      ---> wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+            vi /etc/apt/sources.list:
+        adding this: deb https://pkg.jenkins.io/debian-stable binary/
+        ------------
+     sudo apt-get update
+     sudo apt-get install jenkins
+	 
+	 3.2)install the jenkins in (using rpm packages):
+	 ============================================
+	 using rpm packages
+         sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+         sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+	    Install jenkins
+           #yum install jenkins -y
+		   
+
+         Start jenkins service
+           #service jenkins strat
+		              (0r) centos7/redhat7
+		   systemctl start jenkins
+           systemctl restart jenkins
+           systemctl status jenkins
+
+
+            rpm -qa jenkins          //jenkins remove
+            cd  /etc/yum.repo.d  //
+            remove the jenkins.repo file
+		   
+        If you want chenage the port number
+        #vi  /etc/sysconfig/jenkins 
+
+
+      3.3)Using warfile: In this apporach you hava already install the jdk in your system
+	  ==================
+
+      Go to jenkin.io in google 
+
+      wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+      java -jar jenkins.war --httpPort=9090
+
+      Go to google and type the 192.66.66.2:8080
+
+      jenkins page is opened
+=====================================================****************************************=====================================================
+Master and Slave configartion:
+------------------------------
+
+go to master login to putty do all commands
+
+vi  /etc/ssh/sshd_config    **// ssh communication purpose master and slave
+
+    1.password based 
+    ----> public authentication yes
+   -----> permit login yes
+    ----> password base autentication yes
+
+        systemctl restart sshd
+
+  2.password less autho
+     ------>#ssh-keygen
+                    3 times enter presskey
+      ------->ll
+                 private        id_rsa
+                 public          id_rsa.pub
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------JENKINS INTERVIEW QUESTION-------------------------------------------
+1.Which tool have you used for implement CI/CD?
+A.Jenkins
+
+2.ant alternate tool do know for CI/CD?
+A.Bamboo/udeplao/teamcity/tfs....
+
+3.what is continuous Integration
+A.
+
+4.what are of job have you configured in jenkins?
+A.
+5.what is diffence b/w freestyle and pipeline?
+A.freestyle jobs is we can configure every thing through web ui,based on plug installation we get the options.pipe line is every thing is syntax based.
+6.what is pipeline?
+A.
+
+7.what is declarative pipeline?
+A
+8.what is diff b/w declarative pipeline and script based pipeline?
+A.declarative pipeline start with pipeline and scripted pipeline start with node.
+9.write the pipeline syntax?
+A.pipeline {
+  agent any
+  stages {
+     stage(build){
+          steps{
+     }
+}
+
+
+10.what is master/slave architecture?what is the use of master/slave?
+A.
+11.how many we can connect the slaves?
+A. n number od slaves
+12.How many ways we can provide security for your jenkins server?
+A.1.Via SSH
+    2.vai java web start
+13.waht is sonarqube?have you configure?how you configure?
+A.
+14.what is type of artifavtory repository tool have you used?
+A.
+15.what is the use of artifactory tools?
+A.
+16.what type of jobs have you configured in jenkins?
+A.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+  
+
+kotichirumamilla@gmail.com
+
+
+

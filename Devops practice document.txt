@@ -1,0 +1,1201 @@
+a###########Devops tools #############
+
+Create a new dirctory file like mkdir workspace
+
+#### cd workspace
+
+1. JAVA Instalation 
+
+############## java jdk installation ########## for maven
+
+wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+
+tar -xzvf jdk-8u192-linux-x64.tar.gz
+extract tar file
+rm -rf jdk-8u192-linux-x64.tar.gz
+mv jdk-8u192-linux-x64.tar.gz jdk8
+remove extract tar.gz file
+Goto bashrc  vi ~/.bashrc 
+perminant java file in bashrc
+
+export JAVA_HOME=/home/vagrant/workspace/jdk8
+export PATH=$JAVA_HOME/bin:$PATH
+
+to refresh source ~/.bashrc
+
+1   Maven : is a build tools 
+
+######## Maven installation #######
+
+https://maven.apache.org/download.cgi
+
+wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+   ll
+  extract tar file
+  
+  tar -xzvf maven-3.6.0-bin.tar.gz
+   ll
+  remove extract file
+  rm -rf maven-3.6.0-bin.tar.gz
+  
+  mv maven-3.6.0-bin.tar.gz maven
+  perminant maven files in bashrc settings
+  Goto bashrc  vi ~/.bashrc 
+  
+export M2_HOME=/home/vagrant/workspace/maven
+export PATH=$M2_HOME/bin:$PATH
+mvn --version
+
+
+Creating sample project in maven
+
+mvn archetype:generate -DgroupId=com.rns.app -DartifactId=maven-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+cd maven-app
+
+maven clean package 
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <!-- localRepository
+   | The path to the local repository maven will use to store artifacts.
+   |
+   | Default: ${user.home}/.m2/repository -->
+  <localRepository>/home/vagrant/repository</localRepository>
+
+
+
+
+########### Tomcat installation ##########
+
+Goto tomcat https://tomcat.apache.org/download-80.cgi and select tomcat8 download --> core tar.gz (pgp, sha512)
+
+ wget http://mirrors.wuchna.com/apachemirror/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+    ll
+ tar -xzvf apache-tomcat-8.5.35.tar.gz
+  extract tar file
+  
+ rm -rf apache-tomcat-8.5.35.tar.gz
+   ll
+remove extract file
+To change apache tomact as nexus server
+ 
+ mv apache-tomcat-8.5.35/ nexusserver
+ 
+ Goto nexusserver 
+ 
+ cd bin/
+ll
+./startup.sh
+
+Goto web browser 192.168.33.10:8080
+
+we have 401 &404 copy user name and password two lines
+
+Goto tomact/
+
+  cd conf/
+ 
+tomcat-users.xml ---> vi tomcat-users.xml
+
+paste laste line user name <<tomcat and password tomcat >> save and quit
+
+Goto tomact >> cd tomact/webapps/manager/Meta-Inf/context.xml>>
+vi context.xml >> <!-- value ....
+                             .....  --> save and quit
+Goto  tomact/bin/ >>./shutdown.sh >> ./startup.sh
+
+Goto web browser 192.168.33.10:8080
+
+--->> manage apps
+
+######## Nexus   ####
+
+Goto browser nexus war file download
+mv https://web.whatsapp.com/# Nexus
+Download winscp tool >> windows to linux copy files
+copy nexus war file drag to nexusserver/Webapps
+
+Goto Manageapps >> 2. Deploy >> upload nexus war file >> enter deploy
+
+goto tomact/logs/catalina.out
+Vi catalina.out
+tail -f catalina.out
+
+## manageapps -- nexus.war....> sonartype nexus >> login>> admin >admin123>> Repositories>> 1.Release 2. Snapshots copy links open new tab
+Goto Maven-app >> Pom.xml>>
+
+<distributionManagement>
+  <repository>
+  <id>deployment</id>
+  <name>Internal Releases</name>
+  <url>http://192.168.33.10:8080/nexus-2.11.4-01/content/repositories/releases/</url>
+  </repository>
+  <snapshotRepository>
+  <id>deployment</id>
+  <name>Internal Releases</name>
+  <url>http://192.168.33.10:8080/nexus-2.11.4-01/content/repositories/snapshots/</url>
+  </snapshotRepository>
+</distributionManagement>
+:wq
+Goto Maven/conf/settings.xml
+Vi settings.xml
+
+ <server>
+   <id>deployment</id>
+   <username>admin</username>
+   <password>admin123</password>
+  </server>
+:wq
+
+Mvn clean deploy
+
+1. Goto releases >>links.....>><version>3.8.1</version>
+
+2. goto snapshots >>links ......>>><version>3.8.1_snapshots</version>
+
+if you click on releaseslink project related links it wll come.
+
+>>>>>>>>>>>>>>>>>>>....................>>>>>>>>>>>>>>>>>>
+
+
+############ GIT ################ .... Source code Repository
+
+Version control tools..>> Distributed vcs tools>> GIT	
+
+Download git >> git -- version
+
+mkdir git 
+
+# git init 
+#git config --list
+# git config --global user.name "kishore golla"
+# git config --globallist  user.gmail "kishoregolla@gmail.com"
+
+Creating new repository in Git hub
+Repository name kishoregolla 527
+click repository right side Clone/Download option is there,copy http ip address
+#git clone URL Paste..........
+#git clone https://github.com/KishoreGolla527/repository.git
+#git push orgin master 
+#git >> cd repository
+#ll
+#touch file1 file2
+# git status 
+#Git add .
+#git commit -m "created file1 file2"
+#git push orgin master
+For Example:
+Add >>> touch abc1
+#git add .
+#git commit -m "1st commit"
+#git push origin master
+...
+
+For parallel development
+# take 2 git bash machines
+#create 2 directories 
+#mkdir developer1 developer2
+# cd developer1
+#ll
+#git clone https://github.com/KishoreGolla527/repository.git
+#cd repository
+#ll
+#toch java.txt
+#echo "developer1 has been changed " > java.txt
+#git status
+#git add .
+#git commit -m " java file"
+#git push origin master
+...........
+cd developer2
+#ll
+#git clone https://github.com/KishoreGolla527/repository.git
+#git pull origin master
+#cd repository
+#ll
+#vi java.txt
+#echo "developer2 has been changed " > java.txt
+#git status
+#git add .
+#git commit -am " java file edit 2nd time"
+#git push origin master
+......
+# cd developer1/repository/java.txt
+#echo "developer1 changes 2nd time " >> java.txt
+#vi java.txt
+#git add .
+#git commit -am "developer1 changes from second time"
+#git push
+  git mergetool
+#enter
+4 tables  ...............>>> if you edit ctrl+W
+vi java.txt
+rm -rf java* .....> backup files will be deleted
+#git status
+#git commit -am "after merge"
+#git push origin master
+....
+to check  git log files and status and file name 
+
+
+......................>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>......................
+############ JENKINS #############
+
+1. continous integration server
+
+HOW TO INSTALLATION JENKINS>>>>>>>
+
+Go to download jenkins .>> Download Jenkins 2.150.1 for:
+Wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+java -jar jenkins.war
+27160cfc3d61464f8d114865770af037
+GO to browser paste password>> customize jenkiens pluggins>>install all pluggins>>
+Give User name $ password >> login >> manage jenkins
+ java -jar jenkins.war --httpPort=9000
+ 
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ Download Jenkins.
+
+Open up a terminal in the download directory.
+
+Run java -jar jenkins.war --httpPort=8080.
+
+Browse to http://localhost:8080.
+
+Follow the instructions to complete the installation.
+
+When the installation is complete, you can start putting Jenkins to work!>>>>>>>>>>>>>>>>>>>>>>>>>
+
+jenkins ....
+
+#########@@@@@@@@@@@@@@@@@@ Jenkins @@@@@@@@@@@@@@@@@
+
+1. master and slave 
+2. Global tool configurations
+3. manage jobs
+4. Pluggins management
+5. security configurations
+...........
+
+1 . master  and salve configurationss
+
+       mkdir workspace
+      cd workspace/
+      vi ~/.bashrc
+      source ~/.bashrc
+      java -version
+      hostname -I
+   
+  SSH communication purpose in master and slave
+    vi /etc/ssh/sshd_config
+   
+ 1. password based 
+ 
+    1. public authentication yes
+    2. root permit login
+    3. password base authentication yes
+    systemctl restart sshd
+        cd ~
+        cd .ssh
+        ls -la
+       cd .ssh/
+       ls
+2.password less
+        ssh-keygen
+	enter >> ls>> sshid_rsa  sshid _rsa pub.
+  
+ goto master>> ssh-copy-id root@192.168.33.11
+               enter password : vagrant/
+               ok
+
+ssh root@192.168.33.11
+            pass word : vagrant 
+             slave machine >> .ssh/>>ls
+	
+2.Global tool configurations .........(slave machine)
+	goto tool configurations >> jdk>>
+	jdk name : jdk1.8
+	JAVA_HOME:/home/vagrant/workspace
+	apply &save >> ok
+
+HOW to Create a Node ::::::::
+
+Name:slave	
+Description: slave
+no of executors	:2
+Remote root directory: /home/vagrant/workspace/jdk1.8
+Launch method: launching agnents via ssh
+host :192.168.33.11 >> credential >> add>> jenkins>> username with password 
+root :vagrant
+save and apply
+................
+
+3. E-mail Notification  
+
+SMTP server :smtp.gmail.com
+Default user e-mail suffix	: @gmail.com
+goto advanced >>>
+
+3. Manage jobs :
+goto new item
+name : new project
+free style project
+ok
+
+Upsteam jobs & Downstream jobs
+
+And again create 3 jobs like new project 
+1.devjob -  prebuildjob - upstreamjob
+2.staging jobs
+3.prodjob-postbulid-downstreamjob
+first devjob >>>>build now
+second stagingjob ...>> buildnowGoto VIEW(+) >>
+1.List view :
+1.devjob
+2.stagingjob
+3.prodjob
+
+2.Build pipeline : ***** install build pipeline
+1.List view
+1.devjob
+2.stagingjob
+3.prodjob
+
+Deployment (Automation):
+
+Now goto stagingjob >>build triggers>> Build after other projects are built
+                     >> postbulid....>> add postbuild >>>othersprojects to jobs
+					 
+then goto pipelineview >> build now
+
+Delivery (Manuval):
+Now goto stagingjob >>build triggers>> Build after other projects are built
+                     >> postbulid....>> addpostbuild >>>othersprojects to job to manuval to step
+					 
+					 Run >> ALL
+					 
+					 
+4. Pluggins management :
+
+
+Goto >>  manage jenkiens >>Manage pluggins >> Available >> Build pipeline pluggins >>> install without restart
+
+OFFline:
+
+Goto >>  manage jenkiens >>Manage pluggins >> Advance >>updatesite >>URL
+Build pipeline pluggins for jenkiens >> .hpi (hudson pluggin interface) file ...>> download
+Just remove -update-json >.. ok
+Then >> manage jenkiens >>Manage pluggins >> Upload pluggin >> download file >>> Build pipeline upload >>> okk
+Online:
+>>>>>>>>> Contionus Integration with  Git& Maven $tomcat ###########################################################
+
+New item : ci pipeline 
+
+free style 
+ok >> restrict where project can be run >>> slave
+Restrict where projects can be run ..>>>slave
+Postbuild >> E-mail>> devopstestmail@gmail.com
+
+Goto >> Github.com >>> create new repository>> maven-Webapp
+and Gote master >>> maven sample project >> change maven-Webapp  (((( i.e master and git repo it should be same))
+cd maven-Webapp >> yum install git -y
+ll -a
+git init 
+ll -a 
+git remote add origin 
+git config --list
+git config global --list
+git add .
+git status
+git commit -m " first commit"
+git status
+git push origin master
+Git hub: user name
+Git hub password : pass
+#####..... Goto github.com >>> copy link address >>>> Source code management (https://github.com/KishoreGolla527/maven-webapp.git)
+Source code managemant >> Git 	>>> advance >> origin 
+Branch Specifier (blank for 'any' : master
+
+Goto slave machine >> cd workspace >> download maven tool >> extract it >> rename maven
+
+Goto jenkins >> sourcecode managemant >>> mvn clean package
+GOto manage jenkins >> manage node >> goto environment variables >>>
+
+ADD >>> 1. Name : JAVA_HOME
+           Value ; /home/vagrant/workspace/jdk8
+		2. Name : M2_HOME
+		   value :  /home/vagrant/workspace/maven
+		3. Name : PATH
+		   value : $JAVA_HOME/bin:$M2_HOME/bin:$PATH
+		   apply and save it ..........OOKKKK
+		   
+Goto code Build >>> Excute shell >> maven clean package
+
+Build now >>> sucesss
+		   
+
+Goto master >> maven-webapp>> pom.xml >>>
+
+<distributionManagement>
+  <repository>
+  <id>deployment</id>
+  <name>Internal Releases</name>
+  <url>http://192.168.33.10:8090/nexus-2.11.4-01/content/repositories/releases/</url>
+  </repository>
+  <snapshotRepository>
+  <id>deployment</id>
+  <name>Internal Releases</name>
+  <url>http://192.168.33.10:8090/nexus-2.11.4-01/content/repositories/snapshots/</url>
+  </snapshotRepository>
+</distributionManagement>
+:wq
+
+Goto Maven/conf/settings.xml
+Vi settings.xml
+
+ <server>
+   <id>deployment</id>
+   <username>admin</username>
+   <password>admin123</password>
+  </server>
+:wq
+
+Goto tomact >> conf >> server.xml>>>> change it http port name ((8080=8090)) 1,2
+Goto tomact >> bin >> ./shutdown.sh>>>./startup.sh >>> cd ..
+
+Goto >> cd maven webappp .>> git add .>>> git status >>>git commit -m " distribution change managemant "
+
+Goto tomact >> logs >> catalina.out >>> tail -f catalina.out
+Goto Jenkins >> Cipipeline >>configure >> Build >>> Mvn clean deploy
+
+######## post build actions ##########
+
+
+############## Ansible #######################
+
+...... configuration managemant tool
+
+1. 
+How install & update ansible
+
+1. create new directory like ansible in paste vagrant file and change ip address
+
+***** 1 Multiple Vm's are operating with one Vm. 
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+HOST_IP = '192.168.33.13'
+HOST2_IP = '192.168.33.14'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+config.vm.define "ansible-01" do |ansible1|
+ansible1.vm.hostname = "ansible1.rnstech.com"
+ansible1.vm.box = "bento/centos-7.2"
+ansible1.vm.box_url = "bento/centos-7.2"
+ansible1.vm.network :private_network,
+      ip: HOST_IP,
+      netmask: '255.255.255.0'
+ansible1.vm.network :forwarded_port, guest: 80, host: 8081
+#ansible1.vm.synced_folder 'html', '/var/www/html'
+#ansible1.vm.provision 'shell', path: 'provision.sh'	
+end
+
+config.vm.define "ansible-02" do |ansible2|
+ansible2.vm.hostname = "ansible2.rnstech.com"
+ansible2.vm.box = "bento/centos-7.2"
+ansible2.vm.box_url = "bento/centos-7.2"
+ansible2.vm.network :private_network,
+      ip: HOST2_IP,
+      netmask: '255.255.255.0'
+end
+end
+
+Instalation process :
+
+      1. yum install epel-release 
+      2. yum update
+      3. yum install git python python-devel python-pip openssl ansible
+   
+
+2.ssh connection should be enabled both master and slave { like central and target }
+
+             Root permint login
+             authentication yes
+             password aurhentication yes
+			 
+3.	Add ansible user {master and slave }
+ 
+    useradd ansible 
+	passwd ansible (welcome)
+	
+	Visudo {master and slave }
+	root ALL=(ALL) ALL
+	ansible ALL=(ALL)  Nopasswd:ALL
+	
+4.password less ssh-keygen {master and slave }
+
+  su ansible
+  ssh-keygen
+  ssh-copy-id ansible@192.168.33.14
+  ssh-copy-id ansible@192.168.33.13
+  ssh ansible@192.168.33.13
+  ssh ansible@192.168.33.14
+  
+ ## sudo su
+  cd /etc/ansible/ansible.cfg (ansible configurations path)
+	we can modify 2 steps
+	1. inventory step enabled (remove comment line #)
+	2. sudo user  = ansible
+	
+ cd /etc/ansible/hosts ---->>inventory location
+	come to last line
+	vi /etc/ansible/hosts
+	[local]
+	192.168.33.13
+	[centos]
+	192.168.33.13
+	192.168.33.14
+	[webserver]
+	192.168.33.14
+	:wq
+[ansible@ansible1 ansible]$	ansible all -m ping
+to run all commands in ansible
+........
+1. Ansible module like yum,copy,when,line in line,debug
+2. Ansible Playbooks : sequene of tasks its contain variable,files,templates,handlers,roles
+3. Ansible Roles ...>> we have to search ansible galaxy >> system >> search like java,tomcat
+                                        ansible module index
+										
+4.Tomcat 
+
+we can goto https://github.com/venkat09docs/files/tree/master/Ansible%20Roles
+
+
+###################################################################################################################################
+******************** Nagios *********************
+nagios is a monitoring tool
+Monitor entire IT infrastructure
+
+1. Installing nagios in Ubuntu
+
+# apt-get update
+# apt-get install tasksel
+tasksel .......>>>>> is group of packages
+# tasksel install lamp-server
+ ... set password for my sql like welcome
+# apt-get install nagios3 -y
+
+  ... internet site
+  Domain name ... rns.com
+  password : admin
+  
+# service nagios3 status
+
+# service nagios3 start
+
+Access the Nagios :::: 192.168.33.17/nagios3/
+
+$$$$$$ nagios conf file loc : cd /etc/nagios3/nagios.cfg
+$$$$$$  nagios pluggins loc : cd /etc/nagios-pluggins
+
+How to connect client configuration :
+
+First Install NRPE in slave machine NRPE: Nagios remote pluggin engine ..> 5666
+1. yum install epel-release -y
+2.yum install nagios-nrpe nagios-pluggins -yes
+
+Goto Allow host : 127.0.0.1,192.168.33.17
+
+3.systemctl start nrpe
+
+And loggin to Nagios central machine
+1. cd /etc/nagios3/conf.d/
+list of all files is available.
+2. goto localhost_nagios2.cfg
+
+and take one new file Vi ansible.cfg
+
+define host{
+        use                     generic-host            ; Name of host template to use
+        host_name               ansible node
+        alias                 my client host
+        address                192.168.33.14
+        }
+
+define service{
+        use                             generic-service         ; Name of service template to use
+        host_name                     ansible node
+        service_description             Disk Space
+        check_command                   check_all_disks!97%!10%
+		
+             }
+And Resstart 
+
+service nagios3 stop
+service nagios3 start
+
+
+###################################################################################################
+........       DOCKER ........... container based managemant tool >>>>>>>> container has only one application.
+
+###################################################################################################
+Advantages :
+1. fast perfomanance 
+2.less time
+3. Reduce cost
+
+Docker images >>>>>>>>>>>>> container
+
+
+1. First login Docker machine
+uname -i  >>>> process version
+uname -r ....>>> kernel version
+
+2. cd /etc/yum repo.d
+3.vi docker.repo
+
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+
+:wq
+
+Yum search docker
+Yum update
+yum install docker-engine -y
+systemctl start docker
+systemctl enable docker
+docker info
+docker version
+
+goto ll /var/run/docker.sock
+cd /var/run/docker
+
+1. docker search centos
+docker pull ubuntu:xenial
+docker run ubuntu:xenial ...............run the image
+docker run -it ubuntu:xenial /bin/bash ........... connect to ubuntu xenial
+docker run -itd ubuntu:xenial /bin/bash ............. background automaticaly run
+docker attach containerid ......... directly connect&exit
+docker inspect 'ubuntu:xenial' ........... to see layers
+docker inspect -f {{.network setting.ipaddress}} container name 	............format can ube used to extract json
+docker inspect 'containerid' | grep IPaddress ................ to particular id
+docker ps -a ........... to list all containers
+docker start container id 
+
+docker exec -it ubuntu:xenial /bin/bash
+                (container id )
+				
+How to remove container :				
+docker images
+docker rmi imagesname
+
+docker ps -a
+docker ps -a -q
+docker rm containerid
+docker rm 'docker -a -q' ... to delete all containers ((( backtck ``))
+1.first stop docker containers then we can delete all containers at a time.
+(or) 
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+1. top ..... to list all containers
+2. stat  .... with in container we can see all info like cpu,mempry utilization
+
+Docker top container name
+Docker stat container name
+1. first machine we can run docker events
+2.login second machine docker run -it ubuntu:xenial /bin/bash
+  docker attach container name
+to see all events in first machine means starting services and stopping services logs
+
+
+1. How to push image name to docker hub......
+
+       docker images
+       docker ps -a
+       docker start 3be5677cec59
+       docker exec -it 3be5677cec59 /bin/bash
+       docker ps -a
+       docker commit -m "telnet" 3be5677cec59 telnet:v1
+       docker ps -a
+       docker images
+       docker push gkishore527/telnet:tagname
+       docker login
+       docker images
+      cat ~/.docker/config.json
+      docker tag local-image:tagname reponame:tagname
+      docker tag telnet:v1 gkishore527/telnet:v1
+      docker images
+      docker push gkishore527/telnet:v1
+
+
+2. HOW TO ADD PORT TO NGINX SERVER
+ 
+First install nginx
+1.docker pull nginx:latest
+docker run -itd -p 80 nginx:latest ...................>>>>>> random port 
+docker ps
+docker exec -it vigilant_edison /bin/bash
+goto container in nginx server restart
+service nginx start
+http://192.168.33.20:32768
+2.docker run -itd -p 8080:80 nginx:latest ...............>>>>>. hostos with custom port
+http://192.168.33.20:8080/
+3.docker run -P nginx:latest
+4.docker run -p 127.0.0.1:8080:80 nginx:latest
+
+3. how to create network and assign containers
+
+[root@localhost /]# man docker-network-create --help
+docker network create 
+[root@localhost /]# docker network create --subnet 10.1.0.0/16 --gateway 10.1.0.1 --ip-range 10.1.4.0/24 --driver=bridge --label=host4network bridge01
+docker network ls
+[root@localhost /]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+dece66eedba8        bridge              bridge              local
+06634f104f49        bridge01            bridge              local
+f935c876a650        host                host                local
+01ca7f1e13eb        none                null                local
+
+docker network inspect bridge01
+docker run -it -d --net bridge01 --name kishoreubuntu ubuntu:xenial
+docker exec -it kishoreubuntu /bin/bash
+apt-get update -y
+apt-get install net-tools -y
+hostname -I
+10.1.4.0
+netstat -rn .......>>>>>>>>>>>>>>> to check gateway
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.1.0.1        0.0.0.0         UG        0 0          0 eth0
+10.1.0.0        0.0.0.0         255.255.0.0     U         0 0          0 eth0
+
+3.How to create a Volumes
+
+first craete a mydata directory
+cd mydata
+# touch test.text
+#echo"this is volume" > test.text
+
+1. docker run -it  --name voltest -v /mydata ubuntu:xenial /bin/bash
+
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          40G  3.6G   34G  10% / .............................1 
+tmpfs           244M     0  244M   0% /dev
+tmpfs           244M     0  244M   0% /sys/fs/cgroup
+/dev/sda1        40G  3.6G   34G  10% /mydata ............................2
+shm              64M     0   64M   0% /dev/shm
+tmpfs           244M     0  244M   0% /sys/firmware
+
+
+2.docker run -it  --name voltest2 -v ~/:/mydata ubuntu:xenial /bin/bash
+
+
+How create Dockerfile 
+
+1. create a docker directory
+mkdir docker
+cd docker
+FROM ubuntu:xenial
+MAINTAINER rns <rns@gmail.com>
+RUN apt-get update -y
+RUN apt-get install telnet net-toools -y
+:wq
+docker build -t rnsubuntu:v1 .
+ docker run -it -d --name rnsubuntu02 rnsubuntu:v1
+ docker exec -it rnsubuntu02 /bin/bash
+
+From test user to Root current container
+docker exec -it -u 0 container_name/bin/bash
+
+How to craete CMD vs RUN
+
+RUN .. image creation
+CMD ... launching container (overriding) custom&default
+ENTRYPOINT >>>>>>>> Default command (not overriding)
+
+2. How to create CMD 
+
+vi Apache_dockerfile
+
+FROM ubuntu:xenial
+MAINTAINER rns <rns@gmail.com>
+RUN apt-get update -y
+RUN apt-get install telnet net-toools -y
+CMD echo "this is launching container with cmd "
+:wq
+
+docker build -t rnshttp -f Apache-Dockerfile .
+
+docker run rnsubuntu:xenial
+docker run rnsubuntu pwd
+
+3. EXPOSE ...........port of the docker file
+
+FROM ubuntu:xenial
+MAINTAINER rns <rns@gmail.com>
+RUN apt-get update -y
+RUN apt-get install telnet net-toools -y
+EXPOSE 80
+ENTRYPOINT apachectl "-DFOREGROUND"
+docker run -d rnshttp
+docker run -p 80:80 -d rnshttp
+
+3. COPY ...to copy host to image and advance for ADD for remote urls or remote repositories
+touch test.sh
+echo"this is test" >> test.sh
+
+FROM ubuntu:xenial
+MAINTAINER rns <rns@gmail.com>
+RUN apt-get update -y
+RUN apt-get install telnet net-toools -y
+COPY test.sh /tmp/
+:wq
+docker build -t rnsubuntu .
+docker run -d -it rnsubuntu /bin/bash
+docker exec -it rnsubuntu /bin/bash
+goto contaner 
+ll tmp/
+
+4.DOCKER COMPOSE .....orchestrationtool for multi container docker applications  
+       yum search pip
+       yum install epel-release -y
+       yum search pip
+       yum install python2-pip -y
+       pip install docker-compose
+       pip install --upgrade pip
+create vi docker-compose.yml
+hello:
+  image: hello-world
+:wq
+
+docker-compose up
+docker-compose logs
+docker-compose ps
+docker-compose start 
+docker-compose stop
+
+
+2. how to install wordpress and mysql(mariadb)
+
+vi compose-docker.yml
+
+version: '3.3'
+
+services:
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     volumes:
+       - wordpress_files:/var/www/html
+     ports:
+       - "80:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: my_wordpress_db_password
+
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: my_db_root_password
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: my_wordpress_db_password
+volumes:
+    wordpress_files:
+    db_data:
+
+:wq
+
+
+docker-compose up -d
+docker-compose stop
+docker-compose start
+
+ITIL & JIRA
+
+%%%%%%%%%%%%%%%%%%%%%%%%  Kubernates %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%:
+
+Kubernates (k8s)is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+How to install k8s in vagrant
+1.master
+2.worker nodes
+
+# craete a directory in vm.
+
+mkdir k8s
+cd k8s
+git clone https://github.com/venkat09docs/IAAC.git
+
+## cd  /d/k8s/IAAC/provisionScripts/vagrant-kube-cluster
+ 
+vagrant up --provider virtualbox
+
+Terminal 1
+vagrant ssh kube-01
+sudo su
+
+Terminal 2
+vagrant ssh kube-02
+sudo su
+Terminal 3
+vagrant ssh kube-03
+sudo su
+
+1.To initialize master, run this on kube-01 ..{{{{ master}}}}
+
+ kubeadm init --apiserver-advertise-address 192.168.12.20 --pod-network-cidr=192.168.0.0/16
+ 
+2. After master being initialized, it should display the command which could be used on all worker/nodes to join the k8s cluster ..((((worker/nodes))))
+
+kubeadm join 192.168.12.20:6443 --token 86ang8.q3qs1pa316tr7ko5 --discovery-token-ca-cert-hash sha256:f380619dcd34d80e7947c4c2d7512936da6983f72bfcc3457c338da47e338a04
+
+
+master 
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+## Installing CNI with Weave
+export kubever=$(kubectl version | base64 | tr -d '\n')
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
+
+To check if nodes are ready
+kubectl get nodes
+kubectl get cs
+kubectl get nodes
+NAME      STATUS    ROLES     AGE       VERSION
+kube-01   Ready     master    m        v1.8.2
+kube-02   Ready     <none>    m        v1.8.2
+kube-03   Ready     <none>    m        v1.8.2
+
+Additional Status Commands
+kubectl version
+kubectl cluster-info
+kubectl get pods -n kube-system ... to check namespace 
+kubectl get events
+kubectl get ns ..........to check namespace
+
+kubeadm join 192.168.12.20:6443 --token cdzc9x.7fib0xq7p9q66yhe --discovery-token-ca-cert-hash sha256:7fe0eb412baf701d9b1ff651b9508829674afbd9229e60000966ac2d2b03b598
+
+
+################## Terraform ###########################################################
+#########################################################################################
+
+Write, Plan, and Create Infrastructure as Code
+
+cloud formation ------ AWS
+Terraform ----------- vagrant,vault ---- multiple providers
+API - DSL ---->>> domain specific language
+
+HCL ---->>> hashicorp configuration language
+
+
+terraform resuorces are like
+1. providers -- AWS.AZURE,DNS
+2.Variables -- JSON,HCL,CLI
+3.modules -- Parameters
+4. output -- console,json
+
+terraform commands are 
+1.terraform init -- initialize
+2.terrraform plan -- plan of changes
+3.terraform apply -- applies a plan
+4.terraform destroy -- delete all files
+
+*** for storing data configuration files ----- state file like ..(( terraform.tfstate ))
+
+Goto vagrant 
+
+## vagrant up
+1. sudo su
+# cd ~
+# wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
+# yum install unzip -y
+# echo $PATH
+# unzip terraform_0.11.11_linux_amd64.zip -d /usr/bin/
+# terraform -v
+Terraform v0.11.11
+# mkdir terraform-scripts
+# cd terraform-scripts/
+#touch hello.tf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+  
+
+
+ 
+ 
+  
+  
+
+								 
+							 
+							 
+							 
+							 
+							 
+							 
+
+ 
+  
+
+
+
+
+
+

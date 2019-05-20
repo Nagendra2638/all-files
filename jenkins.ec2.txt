@@ -1,0 +1,107 @@
+ Jenkins installtion aws:   using rpm based.
+----------------------
+1. Lauch centos Linux EC2 inatncce
+
+2.install java and set the path
+
+3.Download jenkins on to EC2 instance
+          ----->  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo	
+         ------> sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.ke
+
+4.Install jenkins
+    #yum intall jenkins
+
+5.Start jenkins service
+    #service jenkins strat
+If you want chenage the port number
+#vi  /etc/sysconfig/jenkins
+
+
+Using warfile: In this apporach you hava already install the jdk in your system
+-------------
+Go to jenkin.io in google 
+
+     wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+   java -jar jenkins.war --httpPort=9090
+
+
+-------------------------------
+1.install the java
+
+wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz
+
+
+      then unzip the tar file
+     tar -zxvf jdk-1.8-tar.tz
+goto .bashrc give the path
+
+    export JAVA_HOME=/root/workspace/jdk1.8
+    export PATH=$JAVA_HOME/bin:$PATH
+      
+     #source ~/.bashrc         ***//using in this command updating the bashrc file.
+  java -version
+
+2.install the jenkins
+   ---> wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+       vi /etc/apt/sources.list:
+  adding this: deb https://pkg.jenkins.io/debian-stable binary/
+------------
+     sudo apt-get update
+     sudo apt-get install jenkins
+
+3.using rpm packages
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+yum install jenkins -y
+
+systemctl start jenkins
+systemctl restart jenkins
+systemctl status jenkins
+
+
+rpm -qa jenkins          //jenkins remove
+cd  /etc/yum.repo.d  //
+remove the jenkins.repo file
+
+
+Go to google and type the 192.66.66.2:8080
+
+jenkins page is opened
+
+Master and Slave configartion:
+------------------------------
+
+go to master login to putty do all commands
+
+vi  /etc/ssh/sshd_config    **// ssh communication purpose master and slave
+
+    1.password based (both master and slave do below steps) 
+    ----> public authentication yes
+   -----> permit login yes
+    -----> password base autentication yes
+
+  systemctl restart sshd 
+checking perpose we will do below step
+
+ssh 192.1683.22.3(ip)
+ it is connect sucessful master and slave connection.
+
+  2.password less autho
+     cd .ssh
+     ------>#ssh-keygen
+                    3 times enter presskey
+      ------->ll
+                 private        id_rsa
+                 public          id_rsa.pub
+
+
+   
+
+
+  
+
+kotichirumamilla@gmail.com
+
+

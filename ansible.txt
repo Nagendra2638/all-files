@@ -1,0 +1,43 @@
+ansible notes(comfigiration management tool)
+----------------
+Launch 2 instance on centos [master and target(slave)]
+ On master:
+ # yum install epel-release
+# yum update
+#yum install git python python-devel python-pip openssl ansible
+#ansible --version
+
+Add ansible user(Repeat the same step for remaining systems like master and slave)
+#useradd ansible
+#passwd ansible
+ Go to ------> visudo(add below contantet)
+   ansible ALL=(ALL)   NOPASSWD: ALL
+
+password based:
+--------------------
+vi /etc/ssh/ssh_config
+    enable 3 options
+1.Root permitlogin yes
+2.pubkey authentication yes
+3.password based autendication yes
+
+update:
+    systemctl restart sshd
+
+ssh ansible@slaveip
+
+password less:
+------------------
+su ansible
+#ssh-keygen
+      enter 3 times
+#ssh-copy-id ansible@salve ip
+
+Ansible configuration:
+
+vi /etc/ansible/ansible.cfg
+add the below lines
+ inventory loaction (remove #)
+ sudo user: ansible (remove#)
+
+  

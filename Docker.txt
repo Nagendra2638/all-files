@@ -1,0 +1,126 @@
+DOCKER:(lanch the ec2 instance on centos)
+----------
+
+cd /etc 
+ll
+/yum.repo.d
+create the repo
+vi docker.repo
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+
+:wq
+
+#yum update
+#yum -y install docker-engine*
+
+-------------------------------------------------------------------------------------------------------
+
+SET UP THE REPOSITORY:
+------------------------------
+
+# yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+#yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+Optional: Enable the nightly or test repositories.
+------------------------------------------------------------
+sudo yum-config-manager --enable docker-ce-nightly
+sudo yum-config-manager --enable docker-ce-test
+
+INSTALL DOCKER CE:
+-------------------------
+# yum install docker-ce docker-ce-cli containerd.io
+
+# systemctl start docker       ---->start the service
+# systemctl status docker     -----> wether the service is running/not
+#systemctl enable docker      ----->To enable the service start at boot time
+#systemctl stop docker         ------>To stop the service
+#docker info                         ------>To verify the installation
+#docker version                     ------> To check the version
+
+Install docker shell scipt
+----------------------------
+# This script is meant for quick & easy install via:
+#   $ curl -fsSL https://get.docker.com -o get-docker.sh
+#   $ sh get-docker.sh
+after install the 2 setps below command is run it
+#sudo usermod -aG docker ubuntu
+
+
+
+#docker pull ubuntu:xenial     //pull the images from docker hub
+
+#docker run ubuntu:xenial     //run the image
+#docker run -it ubuntu /bin/bash   //enter the conatianner
+#docker run -itd ubuntu:xential /bin/bash    //enter into the containner run in background
+#docker inspect 'ubuntu:xenial'                 //all information about the ubuntu machine
+#docker inspect -f {{.architecture}} 'ubuntu:xenial'     //it check the images bits like 64/32bit
+#docker inspect 'conainer_id'|grep IP
+#docker exec -it containerid/name   /bin/bash         //to start the stoped conatiner.
+#docker start cid/name                                          //to start the stoped conatiner.
+
+#docker stats                                //it containes momery and cpu information
+
+#docker ps                     // how many conatiner running in your machine
+#docker ps -a                 //all conatinners
+#docker ps -a -q            /which dispalys container ids only
+
+#docker run -it --name coantanier_name(development) ubuntu     //Running the containers with name
+#docker rename old_container_name new_container_name         //Renameing the existing name
+---------------------------*****Remove the containers******---------------------------------
+#docker rm container id /name   //it removes the container
+#docker rm container_name  container_id   //remove multiple command
+#docker rm -f  container_name  container_id    //it removes the running containner
+#docker rm 'docker ps -a -q'                  //it removes all the containers
+#docker rm -f $(docker ps -a -q)            //it removes all the containers
+--------------------------*****Remove the images******--------------------------------------------
+#docker iamges           //listed all images
+#docker rmi iamge_name or id     //remove the images
+#docker rmi -f image_name or id     //forcible to remove the image
+
+#docker top continer_name            //to see the process of container
+#docker status container_name       // to see the cpu and memory usages
+---------------------------docker file creation--------------------------------------
+vi Dockerfile
+
+FROM nginx
+MAINTAINER nagendra
+RUN  touch test.txt
+CMD ["echo","my-first-image"]
+
+:wq!
+
+docker build -t my-first:latest .
+
+----------------------**********Network**********-------------------------------------------
+#docker network ls                            //To list the all networks
+#docker network ls --no-trunc           //It display complete n/w Ids
+#docker network inspect bridge            //To complete network information like ip,subnets,
+
+#docker network create --subnet 10.1.0.0/24 --gateway 10.1.0.1 mybridge1     //To create network
+#docker network ls                  //n/w is created or not
+#ifconfig
+
+#docker network rm n/w_name_or_id                //remove the co
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+

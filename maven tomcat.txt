@@ -1,0 +1,82 @@
+BUILD TOOL ======>> MAVEN
+============================
+pre-requests
+------------
+          java installation :
+ Go to official website and download it(oracle)
+----------------------------------------
+
+https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz
+     #wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+    # tar -zxvf jdk file  ----->extract the tar file
+    #rm -rf  jdk.1.8----------->remove extract file
+  paremnent path settiing:
+----------------------
+    Goto bashrc     vi   ~./bashrc
+     export JAVA_HOME=/root/workspace/jdk
+     export PATH=$JAVA_HOME:$PATH
+  MAVEN INSTALATION:
+--------------------
+    #wget http://mirrors.wuchna.com/apachemirror/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+   #tar -zxvf maven file
+   #rm -rf maven 3.5
+  paremnent path settiing:
+----------------------
+    Goto bashrc     vi   ~./bashrc
+      export M2_HOME=/root/workspace/maven
+      export PATH=$M2_HOME/bin:$PATH
+mvn -version
+
+creating a sample project:
+-----------------------
+   Go to google and type maven sample project
+              
+  mvn archetype:generate -DgroupId=com.rsn.app -DartifactId=maven-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+created maven-app
+ cd maven-app
+mvn clean package
+
+
+Tomcat Installation:
+-----------------
+    Go to apche.tomcat.org
+       --> select tomcat 8 download
+        select core tar.gz file
+    wget http://mirrors.wuchna.com/apachemirror/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+  tar -zxvf tomcat      /tar xf tomcat
+ rm -rf tomcat tar
+mv tomcattar tomcat
+cd tomcat/bin 
+# ./startup.sh
+    goto google and type the ipaddress and portno 8080 its open the tomcat server(ti showing some error 401)
+cd tomcat/conf/tomcat user.xml   
+   copy the user and password past the tomcat user.xml last line  
+ change username and password username:tomcat pwd:tomcat123  saveit
+
+cd ..
+
+cd tomcat/web apps/manager/META-Inf/context.xml>>
+   vi context.xml
+  <!--value  ......
+..................--> save and quit.
+  GO to tomcat/bin/  
+              ./shutdown.sh
+             ./ startup.sh
+
+go to web browser hit the url and port number
+ 
+open ---> mange apps
+
+******Nexus*******
+------------------
+Go to browser download the nexus war file  
+  Go to 
+
+http://www.sonatype.org/downloads/nexus-latest.war
+
+
+#netstat -ntpl                 //which port is using that service is running
+
+
+
+    

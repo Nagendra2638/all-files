@@ -1,0 +1,44 @@
+#sudo apt-get install tasksel
+#sudo tasksel(to start in GUI)
+
+#sudo tasksel install lamp-server
+    --set the password for the mysql
+#sudo apt-get install nagios3 -y
+
+#sudo service nagios3 status
+#sudo nagios3 -v /etc/nagios/nagios.cfg(nagios configation file)
+#sudo service nagios3 start
+
+--Access the nagios console
+   IPaddress:80/nagios3
+  UN:nagiosadmin
+  PW:welcome
+
+*The main configuration file is (nagio.cfg)
+vi /etc/nagios3/nagios.cfg
+
+plugins location:
+--------------------
+--/etc/nagios-plugins/config/disk.cfg
+
+varifying Nagios config file:
+----------------------------------
+--sudo nagios3 -v /etc/nagios/nagios.cfg
+
+if you want modify on any service on nagios webpage(gui) its thorows exception
+Exception:
+----Nagios is currently not checking for external commands
+---Go to nagios.cfg file check the extelnal_commands=1(should be one)
+-- sudo nagios -v /etc/nagios/nagios.cfg
+service nagios restart
+Exception:
+------------
+--could not start() command file 'nagios.cmd' file
+--set the permissions
+    --service nagios3 stop
+ --dpkg-statoverride --update --add nagios www-data 2710 /var/lib/nagios3/rw
+ --dpkg-statoverride --update --add nagios nagios 751 /var/lib/nagios3
+ -- service nagios3 start
+
+
+ 

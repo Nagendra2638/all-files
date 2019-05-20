@@ -1,0 +1,272 @@
+EC2 Instances
+
+1.How to create an EC2 instance with public IP address using CentOS7 AMI on AWS and how to connect to the instance using key pair ?
+2.Explore how to create an EC2 instance with public IP address using Amazon Linux AMI on AWS and how to connect to the instance using key pair ?
+3.How to create an EC2 instance with public IP address using Windows Server 2016 Base AMI on AWS and how to connect to the instance using key pair ?
+4.Explore how to create an EC2 instance with public IP address using Ubuntu AMI on AWS and how to connect to the instance using key pair ?
+5.How to stop/start/terminate EC2 instances from web console?
+6.What is the difference between stop and terminate EC2 instance on AWS?
+7.How do I protect production instances against accidental termination ?
+8.What are service limits on AWS ?
+9.When I stop and start my CentOS 6 EC2 instance, the public IP address of the instance changes every time. How do you assign a static IP address to this instance?
+10.Create an EC2 instance and deploy a static website using sample html code and apply the following tags to the instance. “Name=WebServer, Environment=QA, Project=Lab,Node=1”
+11.How do I enable password authentication on AWS EC2 to login using password into EC2 instances ?
+12.We are running a java application on EC2 instance and the application is often throwing OutOfMemory errors. How do I increase the memory on AWS EC2 instances?
+13.Create an EC2 instance using CentOS 7 without any public IP address. Install mariadb server on it and explore how to connect to the database from your workstation. Apply the following tags to the DB instance. “Name=mariadb, Environment=QA, Tier=DB”
+
+
+
+EBS Volumes
+
+
+1.Every time I create an EC2 instance and terminates it a volume is left my account. How do I delete the volume also once the EC2 instance is terminated?
+2.When I created the internal database server in the above examples, the instance was created with 8GB default volume size. Now we are running out of disk space. How do I resize the volume size to 12GB.
+3.I want to create a mariadb database server on AWS EC2 instance, add a new volume and mount it under /var/lib/mysql to store all the db data. What are the advantages or disadvantages of this approach to manage the database on EC2 instances on AWS.
+4.How do you automate the backups of the above volume mounted under /var/lib/mysql data.
+
+
+Amazon Machine Images (AMI)
+
+1.I have an EC2 instance on AWS where a web application has been deployed.
+a) Build a custom images with this instance and tag it with name web-v1.
+b) create a new instance using web-v1 image.
+c) Test if you able to view the website.
+2.How to I share the image built in the previous step with public. Ask your friend/team mate to a) Check if he has access to the image  b) Build a new webserver using this web-v1 image.
+3.How do I share my custom images to another account only?
+4.Create the second web server in a different availability zone.  a) Use the AMI created in the previous step to create this instance. b) Choose a different subnet while creating the instance. c) Add following tags. “Name=WebServer, Environment=QA, Project=Lab,Node=2” d) Please add the internal IP of this server in the database server security group to accept the connections.
+5.Create OpenVPN server from marketplace and try to connect to EC2 servers using private IP addresses.
+
+
+Elastic Load Balancer (ELB)
+
+1.Create an ELB with the following requirement.
+   *Security group name “web”. Anyone should be able to access http.
+   *Listeners. http/80 => http/80
+   *Internet-facing
+   *Tags “Name=elb, Environment=QA,”
+   *Attach both webservers to this ELB. Verify the load distribution to the EC2 instances.
+2.How to enable https on ELB using a self-signed certificate?
+4.What are the differences among on-demand, reserved instances and spot instances?
+5.What are the differences among shared instances vs dedicated instances vs dedicated hosts ?
+
+
+Application deployments and migration
+
+1.Our customer wants to host a PHP application on AWS using EC2 instances. The php code is available on github. We want to build a testing environment now. How do you build an EC2 instance with Apache and MariaDB on the same server to deploy the application code.
+2.We have legacy application running in my datacenter in VMWare ESXi environment.  We don’t have the installation and configuration document for this application. How do I migrate this to AWS?
+3.I have an web application running on an EC2 instance in mumbai region ap-south-1a. Now we want to migrate this instance to a different location because of some business reason.  a)  How do I migrate this instance to a different availability zone in the same region ? b) How to I migrate the instance to a different region for example Virginia (us-east-1) ?
+4.We have a sample html application code available on github.  How do I build this website on AWS EC2 instance using user-data ?
+5.What is the process to create an auto-scaling group to host a web application which has dynamic traffic pattern.
+  1.Create RDS instance.
+  2.Create your AMI with application configuration bundled
+  3.Create a ELB
+  4.Create auto-scaling group
+6.What is sticky session ?
+7.What is connection draining ?
+8.What are the different between classic and application load balancers ?
+
+Monitoring, billing and Troubleshooting
+
+1.You have an EC2 instance running on AWS and you always use a pem file to login to the instance. If you have lost the pem file how do you recover the access to the instance?
+2.Create an EC2 instance and enable following cloudwatch metrics.
+  1.cpu utilization >=60
+  2.memory utilization >=60
+3.What are the differences among on-demand, reserved instances and spot instances?
+4.What are the differences among shared instances vs dedicated instances vs dedicated hosts ?
+
+
+
+AWS Interview Questions page 2
+
+1.Migrate the database server to Amazon RDS.
+  1.Create RDS Without multi-AZ
+  2.Security group “sg-db” and open 3306 port to internal subnet only.
+  3.Tags “Name=DbRDS, Environment=QA,Project=Lab”
+  4.Export the data from the DB server and import into RDS.
+  5.Stop the database server instance.
+2.Replace the database IP address in both web server nodes with the RDS database endpoint and also update the username and password needed to
+connect to the database if needed.
+3.Verify the application URL and make sure all the user entries you created previously are available.
+4.Create database snapshot.
+  1.Tags “Name=database-v1”
+5.Create a new database from the snapshot created with the following requirements.
+  1.With multi-AZ enabled
+  2.Tags “Name=db-server-v2, Environment=LAB”
+6.Migrate the whole application to another region.
+  1.Copy web-ami-v1 to us-west-2
+  2.Copy RDS snapshot to us-west-2
+  3.Create EC2 and RDS instances and test your application functionality.
+  (You may remove all the resources created in the previous exercises except the AMI ‘web-ami-v1’)
+7.Create SNS topic “alerts” and subscribe your email Id to the topic to receive any messages from the Topic.
+8.Update cloudwatch to send notifications to alerts topic.
+9.Run stress on ec2 instance and increase the CPU utilization more than 60 and verify if you are receiving alerts.
+10.Create an s3 bucket“demo-<name>-<date>” example : demo-satheesh-20160624
+   1.unzip html-website.zip and upload all the content to the bucket created.
+   2.Enable website configure index.html as Index Document and error.html as Error Document.
+   3.Enable versioning
+11.Create another bucket for event logging
+   1.Create an s3 bucket “events-satheesh-20160624”
+   2.Enable event logging on the first bucket and configure “events-satheesh-20160624” as destination bucket.
+   3.Also write lifecycle policies on “events-satheesh-20160624” to archive the data if the files are older than 15 days
+to Glacier and purge the files older than 30 days.
+12.Create a CloudFront distribution
+  1.Configure the s3 bucket created in previous step as origin to this distribution.
+  2.Disable direct access to s3 bucket using s3 policies
+  3.Add domain alias ‘static.example.com’ to this bucket.
+13.Create a hosted zone on Route53 for a domain example.com
+   1.Create a resource record static.example.com and point to the CloudFront distribution end point.
+   2.Create another resource record www.example.com and point to ELB endpoint.
+14.Create an application stack including Security group, Autoscaling group, ELB using CloudFormation template. Apply all the tags
+similar to examples above.
+
+AWS Interview Questions IAM
+
+1.We have L1support team who should have access to AWS console with read access to all the services on AWS. They should not have write access to any services in any region. How do you achieve this using IAM?
+2.We have a devops who builds the application on AWS infrastructure and they need to access EC2, RDS, S3, Route53, Cloudwatch and SNS services only. This team also need access to manage these services from AWS command line interface (CLI) How do you restrict the access to only these services using IAM ?
+3.We have an architect team who needs to access all the services with full admin privileges except IAM. They should not be able to create any other users or groups on IAM. How do you achieve this using AWS managed policies ?
+4.What are the differences between inline policies and managed policies ?
+5.What are the differences between AWS managed policies and customer managed policies?
+6.How do I enable multi-factor authentication (MFA ) for IAM users?
+7.How do you create custom policy to allow ec2 stop and start instances action only to a user?  Except stop and start instances user should not have any additional privileges.
+8.How do you allow a user to execute any AWS CLI commands from an EC2 instance to manage any resources on EC2 , RDS and S3 using IAM roles? The user should be able to execute the CLI commands without configuring his own credentials.
+9.How do you recover a lost secret access key from IAM ?
+
+
+DevOps interview questions
+DevOps Assignment 1
+
+Technologies/tools involved: AWS EC2, Ansible / Chef / Puppet, Linux, Apache and PHP.
+
+Create an EC2 instance on AWS in Mumbai region and configure as per the following requirement.
+
+ >Install Apache web server and PHP.
+ >Create a sample php page to display the PHP information.
+ >The PHP should have pdo_mysql plugin installed.
+You can accomplish the above task using Ansible or Chef or Puppet at your convenience.
+
+The code should be written with the best practices and should include test cases.
+
+
+ 
+Upload the code to GitHub and share the Git repository URL.
+
+
+DevOps Assignment 2
+Technologies/tools involved: AWS Elastic beanstalk, Jenkins, Github, Tomcat and Maven.
+
+Create an Elastic Beanstalk application on AWS to host a java website using tomcat.
+
+The application should contain two environments.
+Development environment should be created with single standalone server.
+Production environment should be a load balanced environment with autoscaling containing minimum 1 and maximum 4 servers.
+Install a Jenkins server and configure a job as described below.
+
+Download the source code from https://github.com/demoglot/java.git
+Compile source code using maven.
+The job should run every time the new code is uploaded to github by the application development team.
+The generated war file should be deployed to the development environment.
+If the development is successful the same war file should be deployed to the production environment also.
+DevOps Assignment 3
+Technologies/tools involved: AWS EC2, Ansible and MySQL.
+
+Using Ansible execute the following task on AWS.
+
+Create two EC2 instances using CentOS or Amazon Linux or Ubuntu.
+Install MySQL database server on both of the instances.
+Create a sample database on both servers.
+Enable replication between the database servers.
+Objective of the above exercise is any data inserted into the primary database server should be replicated to the secondary database server also.
+
+The code should be written with the best practices and should include test cases.
+
+
+ 
+Upload the code to GitHub and share the Git repository URL.
+
+DevOps Assignment 4
+Technologies/tools involved: AWS EC2, Ansible / Chef / Puppet , Apache or nginx and MySQL.
+
+Using any of the configuration management to execute the following task on AWS.
+
+Create two EC2 instances using CentOS or Amazon Linux or Ubuntu.
+One instance should be configured as a web server using Apache or Nginx.
+The other instance should be configured as a database server with MySQL or MariaDB.
+Download and configure the WordPress application using these servers.
+Document the ways to deploy this whole setup in one command.
+
+The code should be written with the best practices and should include test cases.
+
+
+ 
+Upload the code to GitHub and share the Git repository URL.
+
+DevOps Assignment 5
+Technologies/tools involved: AWS EC2, Ansible / Chef / Puppet , Apache or nginx and MySQL.
+
+Using any of the configuration management to execute the following task on AWS.
+
+Execute this task on Linux either RedHat family or Debian.
+Install apache on 2 virtual machines
+Install haproxy as a load balancer
+Setup sample website on apache web servers
+Configure the stats page to be available publicly
+Make sure the website is still available even if one web server goes down
+Document the ways to deploy this whole setup in one command.
+
+The code should be written with the best practices and should include test cases.
+
+Upload the code to GitHub and share the Git repository URL.
+
+DevOps assignment 6
+Build PHP registration application for production environment
+Instructions
+Please add comments to explain the functionality for every line of code you are writing.
+Please write the code with best practices.
+The code should be ready to be used in production.
+Take screenshots if necessary and add them to a document when you are giving solution.
+Please make sure you are not passing any sensitive information.
+Requirement
+Application is developed in PHP.
+Application content has a lot of static content to be delivered to the customers at optimal speed.
+Application should be highly available and scalable without any manual intervention.
+Expected uptime of the application is 99% in a year.
+Technical stack
+
+LAMP : Linux, Apache, PHP and MySQL (MariaDB)
+
+Sample code : https://github.com/demoglot/php.git
+
+Initially we will have 10 requests/sec on the application for first 3 months. But this will go upto 1000 requests/sec from 3-12 months and after 1 year the request count might reach upto 10000 requests/sec.
+
+Customers
+
+80% from UK
+
+20% from India
+
+Any issues with the infrastructure we should receive email alerts to support@example.com ( Please change this to your own valid email address).
+
+We should have a dashboard where we can see the number requests coming to the web server almost in real time and it should help us monitor the performance of the application.
+
+ 
+
+DevOps assignment 7
+Build website on AWS EC2 instance using Ansible
+Instructions
+ >Please add comments to explain the functionality for every line of code you are writing.
+ >Please write the code with best practices.
+ >The code should be ready to be used in production.
+ >Take screenshots if necessary and add them to a document when you are giving solution.
+ >Please make sure you are not passing any sensitive information like usernames or passwords or AWS access keys in the code.
+ >Please add the code to a github repo and share the access.
+
+
+Requirement
+
+Create a VPC with a public subnet and another private subnet on AWS Mumbai region. You can either use web console or CLi or cloudformation to create VPC and required subnets.
+
+ >Create an EC2 instance in private subnet using Ansible.
+ >Install mariadb server.
+ >Create a sample database.
+ >Create a db user appuser and set password ‘complex_password’ and provide access to the sample database only.
+ >nstall ntp client on this instance and enable the service.

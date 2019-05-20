@@ -1,0 +1,145 @@
+kops installation in aws::
+***************************
+kops  - kubernets operations
+
+
+
+1.lanch the one ubuntu instance anad execute the below steps
+
+https://kubernetes.io/docs/setup/cri/#cri-o
+https://kubernetes.io/docs/setup/independent/install-kubeadm/
+https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
+
+********Install Docker CE**********
+====>Set up the repository:
+----->Update the apt package index
+    #apt-get update
+
+----> Install packages to allow apt to use a repository over HTTPS
+    #apt-get update && apt-get install apt-transport-https ca-certificates curl software-properties-common
+
+----->Add Docker’s official GPG key
+    #curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+------>Add docker apt repository.
+    #add-apt-repository \"deb [arch=amd64]https://download.docker.com/linux/ubuntu \$(lsb_release -cs) \ stable"
+
+-------> Install docker ce.
+#apt-get update && apt-get install docker-ce=18.06.2~ce~3-0~ubuntu
+
+---->Setup daemon.
+#cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
+#mkdir -p /etc/systemd/system/docker.service.d
+
+--------> Restart docker.
+#systemctl daemon-reload
+#systemctl restart docker
+
+Install the kubadmn--->goto kubeadm--->
+#apt-get update 
+
+#apt-get update && apt-get install -y apt-transport-https curl
+#curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+#cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+apt-get update
+apt-get install -y kubelet kubeadm kubectl
+
+*apt-mark hold kubelet kubeadm kubectl*    //no need run the command
+
+
+
+ mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+
+2. kops binaary download
+wget https://github.com/kubernetes/kops/releases/download/1.10.0/kops-linux-amd64
+chmod +x kops-linux-amd64
+mv kops-linux-amd64 /usr/local/bin/kops
+
+3
+
+
+
+cli:
+----
+# wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kubectl
+
+#mv kubectl    /usr/local/bin 
+cd /usr/local/bin
+kubectl   //perimsion denied so give the permission
+chmod +x kubectl
+
+kops installtion
+#wget https://github.com/kubernetes/kops/releases/download/1.11.0/kops-linux-amd64
+# chmod +x kops-linix-amd64
+#mv kops-linux-amd64 /usr/local/bin/kops
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Full Name (With Surname) : Nagendrababu pedireddi 
+Contact Number :8019903638
+Alternate Number : No
+E-mail Id : nagendra36388@gmail.com
+Current location :pune
+Native Place :payakaraopeta(vizag dist)
+Marital Status (Single / Married) :single
+
+Skype ID :ace0a51ea3edb182
+Feasible time for Skype Interview : after post lauch 2pm to 4 pm.
+
+Total IT experience :4.3 years
+Relevant experience :4 years
+
+Current CTC :4.9lakh
+Expected CTC :30% hike
+Negotiated CTC : yes
+Recent hike (Month & year) : march 2018
+
+Current Organization : Accenture 
+Payroll Company : NGRAM TECHNOLOGIES PRIVATE LIMITED
+Employment History :
+Education details (Qualification ,Percentage & pass-out year) :MCA with 70% and 2013 passout.
+University :Andhra University
+
+Notice Period :30days
+Reason for Change :career growth
+Having H1 or B1 Visa (Yes/No),If Yes, approved year & date of expiry : No
+UAN Number : 
